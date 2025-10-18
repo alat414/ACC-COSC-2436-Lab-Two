@@ -9,6 +9,8 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
+
+
 template<typename T>
 class StackADT {
 public:
@@ -31,8 +33,15 @@ public:
         static_assert(N >= MIN_ARRAY_SIZE);
     }
 
-    bool isEmpty() const override {
-        // TODO begin
+    bool isEmpty() const override 
+    {
+        if(!stack.empty())
+        {
+            stack.push
+        }
+        retrun false;
+        
+        
         return false; // TODO: Replace stub.
         // TODO end
     }
