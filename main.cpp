@@ -35,20 +35,25 @@ public:
 
     bool isEmpty() const override 
     {
-        if(!stack.empty())
-        {
-            stack.push
-        }
-        retrun false;
-        
-        
-        return false; // TODO: Replace stub.
+        // TODO begin
+        return topIndex < 0;
         // TODO end
     }
 
     bool push(const T & value) override {
         // TODO begin
-        return false; // TODO: Replace
+        bool result = false;
+        if(topIndex < MIN_ARRAY_SIZE - 1)
+        {
+            topIndex++;
+            items[topIndex] = value;
+            result = true;
+        }
+        else
+        {
+            return result; 
+        }
+        // TODO: Replace
         // TODO end
     }
 
@@ -456,4 +461,6 @@ TEST_CASE("[08] Infix→Postfix — core conversions") {
     CHECK(infixToPostFix("(a*b)+c") == "ab*c+");
     CHECK(infixToPostFix("((a*b)+c)") == "ab*c+");
 }
+
+
 
