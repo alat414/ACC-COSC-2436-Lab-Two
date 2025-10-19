@@ -46,7 +46,7 @@ public:
         if(topIndex < MIN_ARRAY_SIZE - 1)
         {
             topIndex++;
-            items[topIndex] = value;
+            array[topIndex] = value;
             result = true;
         }
         else
