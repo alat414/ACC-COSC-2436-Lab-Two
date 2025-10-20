@@ -70,13 +70,14 @@ public:
     bool pop() override 
     {
         bool result = false;
-        if(isEmpty()) {
-            return false;
-        }
-        else 
+        if(!isEmpty()) 
         {
             topIndex--;
             result = true;
+        }
+        else 
+        {
+            result;
         }
         // TODO begin
         // Replace stub.
