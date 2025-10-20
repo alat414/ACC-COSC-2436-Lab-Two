@@ -58,21 +58,28 @@ public:
     }
 
     T peek() const override {
-        if(isEmpty()) {
+        if(isEmpty()) 
+        {
             throw std::logic_error("Peek on empty.");
         }
-
         // TODO begin
-        return {}; // TODO: replace stub.
+        return array[topIndex]; // TODO: replace stub.
         // TODO end
     }
 
-    bool pop() override {
+    bool pop() override 
+    {
+        bool result = false;
         if(isEmpty()) {
             return false;
         }
+        else 
+        {
+            topIndex--;
+            result = true;
+        }
         // TODO begin
-        return false; // Replace stub.
+        // Replace stub.
         // TODO end
     }
 };
