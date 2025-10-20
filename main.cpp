@@ -128,12 +128,37 @@ private:
     Node<T>* top;
 public:
     ListStack() : top(nullptr) {}
-    ~ListStack() {
+    ~ListStack() 
+    {
         while(pop()) {}
     }
 
     // Copy constructor
-    ListStack(const ListStack & other) {
+    ListStack(const ListStack & other) 
+    {
+        Node<T>* originalChainPtr = other.top;
+        if (originalChainPtr == nullptr)
+        {
+            top = nullptr;
+        }
+        else
+        {
+            top = new Node<T>();
+            top->setItem(originalChainPtr->getItem());
+
+            Node<T>* newChainPtr = top;
+            originalChainPtr = originalChainPtr->getNext();
+
+            while(originalChainPtr != nullptr)
+            {
+                T nextItem = originalChainPtr->getItem();
+                Node<T>* newNodePtr = new Node<T>(nextItem);
+                newChainPtr->setNext(newNodePtr);
+                newChainPtr = newChainPtr->getNext();
+                originalChainPtr = originalChainPtr->getNext();
+            }
+            newChainPtr->setNext(nullptr);
+        }
         // TODO begin
         // TODO end
     }
