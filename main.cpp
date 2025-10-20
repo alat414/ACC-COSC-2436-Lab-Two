@@ -49,10 +49,7 @@ public:
             array[topIndex] = value;
             result = true;
         }
-        else
-        {
-            return result; 
-        }
+        return result;
         // TODO: Replace
         // TODO end
     }
@@ -75,10 +72,7 @@ public:
             topIndex--;
             result = true;
         }
-        else 
-        {
-            result;
-        }
+        return result;
         // TODO begin
         // Replace stub.
         // TODO end
