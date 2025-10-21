@@ -201,7 +201,7 @@ class ListStack : public StackADT<T>
             if (this != &other)
             {
                 delete topPtr;
-                topPtr = new <T>(*other.topPtr);
+                topPtr = new Node<T>(*other.topPtr);
             }
             return *other;
             // TODO end
