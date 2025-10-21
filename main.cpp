@@ -225,7 +225,7 @@ class ListStack : public StackADT<T>
         bool push(const T & value) override 
         {
             // TODO begin
-            Node<T>* newNodePtr = new Node<T>(newItem, topPtr);
+            Node<T>* newNodePtr = new Node<T>(value, topPtr);
             topPtr = newNodePtr;
             newNodePtr = nullptr;
             return true; // TODO: replace stub
