@@ -92,8 +92,14 @@ class Node
         Node* next;
 
     public:
-        Node(T value) : value(value), next(nullptr) {}
-        Node(T value, Node* next) : value(value), next(next) {}
+        Node() : value(T()), next(nullptr) 
+        {
+
+        }
+        Node(T value, Node* next) : value(value), next(next) 
+        {
+
+        }
 
         T getValue() const 
         {
@@ -139,7 +145,10 @@ class ListStack : public StackADT<T>
         Node<T>* topPtr;
 
     public:
-        ListStack() : topPtr(nullptr) {}
+        ListStack() : topPtr(nullptr) 
+        {
+
+        }
         ~ListStack() 
         {
             while(!isEmpty()) 
@@ -160,17 +169,23 @@ class ListStack : public StackADT<T>
             else
             {
                 topPtr = new Node<T>();
+                
                 topPtr->setValue(originalChainPtr->getValue());
 
                 Node<T>* newChainPtr = topPtr;
+               
                 originalChainPtr = originalChainPtr->getNext();
 
                 while(originalChainPtr != nullptr)
                 {
                     T nextItem = originalChainPtr->getValue();
+                    
                     Node<T>* newNodePtr = new Node<T>(nextItem);
+                    
                     newChainPtr->setNext(newNodePtr);
+                    
                     newChainPtr = newChainPtr->getNext();
+                    
                     originalChainPtr = originalChainPtr->getNext();
                 }
                 newChainPtr->setNext(nullptr);
@@ -234,10 +249,13 @@ class ListStack : public StackADT<T>
             if(!isEmpty()) 
             {
                 Node<T>* nodeToDeletePtr = topPtr;
+                
                 topPtr = topPtr->getNext();
 
                 nodeToDeletePtr->setNext(nullptr);
+                
                 delete nodeToDeletePtr;
+                
                 nodeToDeletePtr = nullptr;
 
                 return true;
