@@ -200,8 +200,8 @@ class ListStack : public StackADT<T>
             // TODO begin
             if (this != &other)
             {
-                delete topPtr;
-                topPtr = new Node<T>(*other.topPtr);
+                ListStack temp(other);
+                std::swap(topPtr,temp.topPtr);
             }
             return *this;
             // TODO end
