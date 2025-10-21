@@ -12,98 +12,108 @@
 
 
 template<typename T>
-class StackADT {
-public:
-    virtual bool isEmpty() const = 0;
+class StackADT 
+{
+    public:
+        virtual bool isEmpty() const = 0;
 
-    virtual bool push(const T & value) = 0;
-    virtual T peek() const = 0;
-    virtual bool pop() = 0;
+        virtual bool push(const T & value) = 0;
+        virtual T peek() const = 0;
+        virtual bool pop() = 0;
 };
 
 constexpr int MIN_ARRAY_SIZE=2;
 
 template<typename T, int N>
-class ArrayStack final : public StackADT<T> {
-private:
-    int topIndex;
-    T array[N] {};
-public:
-    ArrayStack() : topIndex(-1) {
-        static_assert(N >= MIN_ARRAY_SIZE);
-    }
-
-    bool isEmpty() const override 
-    {
-        // TODO begin
-        return topIndex < 0;
-        // TODO end
-    }
-
-    bool push(const T & value) override {
-        // TODO begin
-        bool result = false;
-        if(topIndex < MIN_ARRAY_SIZE - 1)
+class ArrayStack final : public StackADT<T> 
+{
+    private:
+        int topIndex;
+        T array[N] {};
+    public:
+        ArrayStack() : topIndex(-1) 
         {
-            topIndex++;
-            array[topIndex] = value;
-            result = true;
+            static_assert(N >= MIN_ARRAY_SIZE);
         }
-        return result;
-        // TODO: Replace
-        // TODO end
-    }
 
-    T peek() const override {
-        if(isEmpty()) 
+        bool isEmpty() const override 
         {
-            throw std::logic_error("Peek on empty.");
+            // TODO begin
+            return topIndex < 0;
+            // TODO end
         }
-        // TODO begin
-        return array[topIndex]; // TODO: replace stub.
-        // TODO end
-    }
 
-    bool pop() override 
-    {
-        bool result = false;
-        if(!isEmpty()) 
+        bool push(const T & value) override 
         {
-            topIndex--;
-            result = true;
+            // TODO begin
+            bool result = false;
+            if(topIndex < MIN_ARRAY_SIZE - 1)
+            {
+                topIndex++;
+                array[topIndex] = value;
+                result = true;
+            }
+            return result;
+            // TODO: Replace
+            // TODO end
         }
-        return result;
-        // TODO begin
-        // Replace stub.
-        // TODO end
-    }
+
+        T peek() const override 
+        {
+            if(isEmpty()) 
+            {
+                throw std::logic_error("Peek on empty.");
+            }
+            // TODO begin
+            return array[topIndex]; // TODO: replace stub.
+            // TODO end
+        }
+
+        bool pop() override 
+        {
+            bool result = false;
+            if(!isEmpty()) 
+            {
+                topIndex--;
+                result = true;
+            }
+            return result;
+            // TODO begin
+            // Replace stub.
+            // TODO end
+        }
 };
 
 template<typename T>
-class Node {
-private:
-    T value;
-    Node* next;
+class Node 
+{
+    private:
+        T value;
+        Node* next;
 
-public:
-    Node(T value) : value(value), next(nullptr) {}
-    Node(T value, Node* next) : value(value), next(next) {}
+    public:
+        Node(T value) : value(value), next(nullptr) {}
+        Node(T value, Node* next) : value(value), next(next) {}
 
-    T getValue() const {
-        return value;
-    }
+        T getValue() const 
+        {
+            return value;
+        }
 
-    Node* getNext() const {
-        return next;
-    }
+        Node* getNext() const  
+        {
+            return next;
+        }
 
-    void setNext(Node* n) {
-        next = n;
-    }
+        void setNext(Node* n) 
+        {
+            next = n;
+        }
 
-    void setValue(const T & v) {
-        value = v;
-    }
+        void setValue(const T & v) 
+        {
+            value = v;
+        }
 };
 
 // Rule of Three / Rule of Five
@@ -127,6 +137,7 @@ class ListStack : public StackADT<T>
 {
     private:
         Node<T>* topPtr;
+
     public:
         ListStack() : topPtr(nullptr) {}
         ~ListStack() 
@@ -141,6 +152,7 @@ class ListStack : public StackADT<T>
         ListStack(const ListStack & other) 
         {
             Node<T>* originalChainPtr = other.topPtr;
+    
             if (originalChainPtr == nullptr)
             {
                 topPtr = nullptr;
@@ -148,14 +160,14 @@ class ListStack : public StackADT<T>
             else
             {
                 topPtr = new Node<T>();
-                topPtr->setItem(originalChainPtr->getItem());
+                topPtr->setItem(originalChainPtr->getValue());
 
                 Node<T>* newChainPtr = topPtr;
                 originalChainPtr = originalChainPtr->getNext();
 
                 while(originalChainPtr != nullptr)
                 {
-                    T nextItem = originalChainPtr->getItem();
+                    T nextItem = originalChainPtr->getValue();
                     Node<T>* newNodePtr = new Node<T>(nextItem);
                     newChainPtr->setNext(newNodePtr);
                     newChainPtr = newChainPtr->getNext();
@@ -212,7 +224,7 @@ class ListStack : public StackADT<T>
                 throw std::logic_error("Peek on empty.");
             }
             // TODO begin
-            return topPtr->getitem(); // TODO: Replace stub.
+            return topPtr->getValue(); // TODO: Replace stub.
             // TODO end
         }
 
