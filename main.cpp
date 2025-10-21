@@ -220,8 +220,11 @@ class ListStack : public StackADT<T>
         ListStack& operator=(ListStack&& other) noexcept 
         {
             // TODO begin
-            ListStack temp(std::move(other));
-            std::swap(*this,temp);
+            if (this != &other)
+            {
+                ListStack temp(std::move(other));
+                std::swap(topPtr,temp.topPtr);
+            }
             return *this;
             // TODO end
         }
