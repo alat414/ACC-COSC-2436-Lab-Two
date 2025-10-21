@@ -130,7 +130,10 @@ public:
     ListStack() : top(nullptr) {}
     ~ListStack() 
     {
-        while(pop()) {}
+        while(!isEmpty()) 
+        {
+            pop();
+        }
     }
 
     // Copy constructor
@@ -164,47 +167,67 @@ public:
     }
 
     // Copy assignment operator
-    ListStack& operator=(const ListStack& other) {
+    ListStack& operator=(const ListStack& other) 
+    {
         // TODO begin
         // TODO end
     }
 
     // Move constructor
-    ListStack(ListStack && other) noexcept {
+    ListStack(ListStack && other) noexcept 
+    {
         // TODO begin
         // TODO end
     }
 
     // Move assignment operator
-    ListStack& operator=(ListStack&& other) noexcept {
+    ListStack& operator=(ListStack&& other) noexcept 
+    {
         // TODO begin
         // TODO end
     }
 
-    bool isEmpty() const override {
+    bool isEmpty() const override 
+    {
         // TODO begin
-        return false; // TODO: replace stub
+        return topPtr == nullptr; // TODO: replace stub
         // TODO end
     }
 
-    bool push(const T & value) override {
+    bool push(const T & value) override 
+    {
         // TODO begin
-        return false; // TODO: replace stub
+        Node<T>* newNodePtr = new Node<T>(newItem, topPtr);
+        topPtr = newNodePtr;
+        newNodePtr = nullptr;
+        return true; // TODO: replace stub
         // TODO end
     }
 
-    T peek() const override {
-        if(isEmpty()) {
+    T peek() const override 
+    {
+        if(isEmpty()) 
+        {
             throw std::logic_error("Peek on empty.");
         }
         // TODO begin
-        return {}; // TODO: Replace stub.
+        return topPtr->getitem(); // TODO: Replace stub.
         // TODO end
     }
 
-    bool pop() override {
-        if(isEmpty()) {
-            return false;
+    bool pop() override 
+    {
+        bool result = false;
+        if(!isEmpty()) 
+        {
+            Node<T>* nodeToDeletePtr = topPtr;
+            topPtr = topPtr ->getNext();
+
+            nodeToDeletePtr->setNext(nullptr);
+            delete nodeToDeletePtr;
+            nodeToDeletePtr = nullptr;
+
+            return true;
         }
         // TODO begin
         return false; // TODO: Replace stub.
