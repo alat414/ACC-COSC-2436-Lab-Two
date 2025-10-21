@@ -208,10 +208,11 @@ class ListStack : public StackADT<T>
         }
 
         // Move constructor
-        ListStack(ListStack && other) noexcept 
+        ListStack(ListStack && other) noexcept
+            : topPtr(nullptr)
         {
             // TODO begin
-            other.std::swap(*this);
+            std::swap(topPtr,other.topPtr);
             // TODO end
         }
 
@@ -220,7 +221,7 @@ class ListStack : public StackADT<T>
         {
             // TODO begin
             ListStack temp(std::move(other));
-            temp.std::swap(*this);
+            std::swap(*this,temp);
             return *this;
             // TODO end
         }
