@@ -180,7 +180,7 @@ class ListStack : public StackADT<T>
                 {
                     T nextItem = originalChainPtr->getValue();
                     
-                    Node<T>* newNodePtr = new Node<T>(nextItem);
+                    Node<T>* newNodePtr = new Node<T>(nextItem, nullptr);
                     
                     newChainPtr->setNext(newNodePtr);
                     
