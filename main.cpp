@@ -160,7 +160,7 @@ class ListStack : public StackADT<T>
             else
             {
                 topPtr = new Node<T>();
-                topPtr->setItem(originalChainPtr->getValue());
+                topPtr->setValue(originalChainPtr->getValue());
 
                 Node<T>* newChainPtr = topPtr;
                 originalChainPtr = originalChainPtr->getNext();
