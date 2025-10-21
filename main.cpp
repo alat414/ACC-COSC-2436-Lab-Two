@@ -160,6 +160,7 @@ class ListStack : public StackADT<T>
         // Copy constructor
         ListStack(const ListStack & other) 
         {
+            // TODO begin
             Node<T>* originalChainPtr = other.topPtr;
     
             if (originalChainPtr == nullptr)
@@ -190,7 +191,6 @@ class ListStack : public StackADT<T>
                 }
                 newChainPtr->setNext(nullptr);
             }
-            // TODO begin
             // TODO end
         }
 
@@ -211,6 +211,7 @@ class ListStack : public StackADT<T>
         ListStack(ListStack && other) noexcept 
         {
             // TODO begin
+            other.std::swap(*this);
             // TODO end
         }
 
@@ -218,6 +219,9 @@ class ListStack : public StackADT<T>
         ListStack& operator=(ListStack&& other) noexcept 
         {
             // TODO begin
+            ListStack temp(std::move(other));
+            temp.std::swap(*this);
+            return *this;
             // TODO end
         }
 
