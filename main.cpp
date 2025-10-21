@@ -147,7 +147,6 @@ class ListStack : public StackADT<T>
     public:
         ListStack() : topPtr(nullptr) 
         {
-
         }
         ~ListStack() 
         {
@@ -241,14 +240,13 @@ class ListStack : public StackADT<T>
             // TODO begin
             Node<T>* newNodePtr = new Node<T>(value, topPtr);
             topPtr = newNodePtr;
-            newNodePtr = nullptr;
             return true; // TODO: replace stub
             // TODO end
         }
 
         T peek() const override 
         {
-            if(isEmpty()) 
+            if(isEmpty())  
             {
                 throw std::logic_error("Peek on empty.");
             }
@@ -259,6 +257,7 @@ class ListStack : public StackADT<T>
 
         bool pop() override 
         {
+            // TODO begin
             bool result = false;
             if(!isEmpty()) 
             {
@@ -274,7 +273,7 @@ class ListStack : public StackADT<T>
 
                 return true;
             }
-            // TODO begin
+            
             return false; // TODO: Replace stub.
             // TODO end
         }
