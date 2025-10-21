@@ -123,116 +123,117 @@ public:
 //
 // We demonstrate all five here in ListStack.
 template<typename T>
-class ListStack : public StackADT<T> {
-private:
-    Node<T>* top;
-public:
-    ListStack() : top(nullptr) {}
-    ~ListStack() 
-    {
-        while(!isEmpty()) 
+class ListStack : public StackADT<T> 
+{
+    private:
+        Node<T>* topPtr;
+    public:
+        ListStack() : topPtr(nullptr) {}
+        ~ListStack() 
         {
-            pop();
-        }
-    }
-
-    // Copy constructor
-    ListStack(const ListStack & other) 
-    {
-        Node<T>* originalChainPtr = other.top;
-        if (originalChainPtr == nullptr)
-        {
-            top = nullptr;
-        }
-        else
-        {
-            top = new Node<T>();
-            top->setItem(originalChainPtr->getItem());
-
-            Node<T>* newChainPtr = top;
-            originalChainPtr = originalChainPtr->getNext();
-
-            while(originalChainPtr != nullptr)
+            while(!isEmpty()) 
             {
-                T nextItem = originalChainPtr->getItem();
-                Node<T>* newNodePtr = new Node<T>(nextItem);
-                newChainPtr->setNext(newNodePtr);
-                newChainPtr = newChainPtr->getNext();
-                originalChainPtr = originalChainPtr->getNext();
+                pop();
             }
-            newChainPtr->setNext(nullptr);
         }
-        // TODO begin
-        // TODO end
-    }
 
-    // Copy assignment operator
-    ListStack& operator=(const ListStack& other) 
-    {
-        // TODO begin
-        // TODO end
-    }
-
-    // Move constructor
-    ListStack(ListStack && other) noexcept 
-    {
-        // TODO begin
-        // TODO end
-    }
-
-    // Move assignment operator
-    ListStack& operator=(ListStack&& other) noexcept 
-    {
-        // TODO begin
-        // TODO end
-    }
-
-    bool isEmpty() const override 
-    {
-        // TODO begin
-        return topPtr == nullptr; // TODO: replace stub
-        // TODO end
-    }
-
-    bool push(const T & value) override 
-    {
-        // TODO begin
-        Node<T>* newNodePtr = new Node<T>(newItem, topPtr);
-        topPtr = newNodePtr;
-        newNodePtr = nullptr;
-        return true; // TODO: replace stub
-        // TODO end
-    }
-
-    T peek() const override 
-    {
-        if(isEmpty()) 
+        // Copy constructor
+        ListStack(const ListStack & other) 
         {
-            throw std::logic_error("Peek on empty.");
-        }
-        // TODO begin
-        return topPtr->getitem(); // TODO: Replace stub.
-        // TODO end
-    }
+            Node<T>* originalChainPtr = other.topPtr;
+            if (originalChainPtr == nullptr)
+            {
+                topPtr = nullptr;
+            }
+            else
+            {
+                topPtr = new Node<T>();
+                topPtr->setItem(originalChainPtr->getItem());
 
-    bool pop() override 
-    {
-        bool result = false;
-        if(!isEmpty()) 
+                Node<T>* newChainPtr = topPtr;
+                originalChainPtr = originalChainPtr->getNext();
+
+                while(originalChainPtr != nullptr)
+                {
+                    T nextItem = originalChainPtr->getItem();
+                    Node<T>* newNodePtr = new Node<T>(nextItem);
+                    newChainPtr->setNext(newNodePtr);
+                    newChainPtr = newChainPtr->getNext();
+                    originalChainPtr = originalChainPtr->getNext();
+                }
+                newChainPtr->setNext(nullptr);
+            }
+            // TODO begin
+            // TODO end
+        }
+
+        // Copy assignment operator
+        ListStack& operator=(const ListStack& other) 
         {
-            Node<T>* nodeToDeletePtr = topPtr;
-            topPtr = topPtr ->getNext();
-
-            nodeToDeletePtr->setNext(nullptr);
-            delete nodeToDeletePtr;
-            nodeToDeletePtr = nullptr;
-
-            return true;
+            // TODO begin
+            // TODO end
         }
-        // TODO begin
-        return false; // TODO: Replace stub.
-        // TODO end
-    }
+
+        // Move constructor
+        ListStack(ListStack && other) noexcept 
+        {
+            // TODO begin
+            // TODO end
+        }
+
+        // Move assignment operator
+        ListStack& operator=(ListStack&& other) noexcept 
+        {
+            // TODO begin
+            // TODO end
+        }
+
+        bool isEmpty() const override 
+        {
+            // TODO begin
+            return topPtr == nullptr; // TODO: replace stub
+            // TODO end
+        }
+
+        bool push(const T & value) override 
+        {
+            // TODO begin
+            Node<T>* newNodePtr = new Node<T>(newItem, topPtr);
+            topPtr = newNodePtr;
+            newNodePtr = nullptr;
+            return true; // TODO: replace stub
+            // TODO end
+        }
+
+        T peek() const override 
+        {
+            if(isEmpty()) 
+            {
+                throw std::logic_error("Peek on empty.");
+            }
+            // TODO begin
+            return topPtr->getitem(); // TODO: Replace stub.
+            // TODO end
+        }
+
+        bool pop() override 
+        {
+            bool result = false;
+            if(!isEmpty()) 
+            {
+                Node<T>* nodeToDeletePtr = topPtr;
+                topPtr = topPtr->getNext();
+
+                nodeToDeletePtr->setNext(nullptr);
+                delete nodeToDeletePtr;
+                nodeToDeletePtr = nullptr;
+
+                return true;
+            }
+            // TODO begin
+            return false; // TODO: Replace stub.
+            // TODO end
+        }
 };
 
 // Must use a stack.
