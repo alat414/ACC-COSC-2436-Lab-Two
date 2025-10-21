@@ -198,6 +198,12 @@ class ListStack : public StackADT<T>
         ListStack& operator=(const ListStack& other) 
         {
             // TODO begin
+            if (this != &other)
+            {
+                delete topPtr;
+                topPtr = new <T>(*other.topPtr);
+            }
+            return *other;
             // TODO end
         }
 
