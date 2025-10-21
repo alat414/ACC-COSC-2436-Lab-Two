@@ -203,7 +203,7 @@ class ListStack : public StackADT<T>
                 delete topPtr;
                 topPtr = new Node<T>(*other.topPtr);
             }
-            return *other;
+            return *this;
             // TODO end
         }
 
