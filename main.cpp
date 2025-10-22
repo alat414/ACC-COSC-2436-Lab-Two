@@ -154,6 +154,16 @@ class ListStack : public StackADT<T>
             }
         }
 
+        T top() const
+        {
+            if(isEmpty())
+            {
+                throw std::underflow_error("Stack is empty");
+            }
+            return topPtr->getValue();
+        }
+    
+
         // Copy constructor
         ListStack(const ListStack & other) 
         {
@@ -314,19 +324,21 @@ bool isPalindrome(const std::string & inputString)
 std::string reversedString(const std::string & inputString) 
 {
     // TODO begin
-    std::cout << "Writing the string backwards\n";
+    ListStack<char> charStack;
+    std::string result;
 
-    if(inputString.empty())
+    for(char ch : inputString)
     {
-        std::cout << "Write backwards the string terminated" << std::endl;
-        return;
+        charStack.push(ch);
     }
-    std::string shorter_string = inputString.substr(0,inputString.length() - 1);
-    reversedString(shorter_string);
+    
+    while(!charStack.isEmpty())
+    {
+        result += charStack.top();
+        charStack.pop();
+    }
 
-    char last_character = inputString.back();
-
-    std::cout << last_character << std::endl;
+    return result;
     // TODO end
 }
 
