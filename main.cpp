@@ -314,7 +314,19 @@ bool isPalindrome(const std::string & inputString)
 std::string reversedString(const std::string & inputString) 
 {
     // TODO begin
-    return {}; // TODO: Replace stub.
+    std::cout << "Writing the string backwards\n";
+
+    if(inputString.empty())
+    {
+        std::cout << "Write backwards the string terminated" << std::endl;
+        return;
+    }
+    std::string shorter_string = inputString.substr(0,inputString.length() - 1);
+    reversedString(shorter_string);
+
+    char last_character = inputString.back();
+
+    std::cout << last_character << std::endl;
     // TODO end
 }
 
