@@ -281,43 +281,27 @@ class ListStack : public StackADT<T>
 bool areCurlyBracesMatched(const std::string & inputString) 
 {
     // TODO begin
-    ListStack<std::string>currentStack; //a new empty stack
+    ListStack<char>currentStack; //a new empty stack
     bool validBalance = true;
     
-    for (int i = 0; i < inputString.length(); i++)
+    for (size_t i = 0; i < inputString.length(); i++)
     {
-        while(validBalance && i < inputString.length()) 
-        {
-            char ch;
-            inputString[i];
-            i++;
+        char ch = inputString[i];
 
-            if(ch == '{')
-            {
-                currentStack.push("{");
-            }
-            else if (ch == '}')
-            {
-                if(!currentStack.isEmpty())
-                {
-                    currentStack.pop();
-                }
-                else
-                {
-                    validBalance = false;
-                }
-            }
-        }
-        if(validBalance && currentStack.isEmpty())
+        if(ch == '{')
         {
-            std::cout << "The current stack has balanced braces\n";
+            currentStack.push(ch);
         }
-        else
+        else if (ch == '}')
         {
-            std::cout << "The current stack does not have balanced braces\n";
+            if(currentStack.isEmpty())
+            {
+                return false;
+            }
+            currentStack.pop();
         }
-
     }
+    return currentStack.isEmpty();
 }
 // TODO end
 
