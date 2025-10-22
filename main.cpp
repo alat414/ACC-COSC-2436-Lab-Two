@@ -318,7 +318,23 @@ bool areCurlyBracesMatched(const std::string & inputString)
 bool isPalindrome(const std::string & inputString) 
 {
     // TODO begin
-    
+    ListStack<char>newStack;
+
+    for (char ch : inputString)
+    {
+        newStack.push(ch);
+    }
+
+    for(char ch : inputString)
+    {
+        if(newStack.isEmpty() || ch != newStack.top())
+        {
+            return false;
+        }
+        newStack.pop();
+    }
+    return true;
+
 }
 
 std::string reversedString(const std::string & inputString) 
