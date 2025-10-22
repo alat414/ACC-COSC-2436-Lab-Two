@@ -9,8 +9,6 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
-
-
 template<typename T>
 class StackADT 
 {
@@ -280,44 +278,91 @@ class ListStack : public StackADT<T>
 };
 
 // Must use a stack.
-bool areCurlyBracesMatched(const std::string & inputString) {
+bool areCurlyBracesMatched(const std::string & inputString) 
+{
     // TODO begin
-    // TODO end
+    ListStack<std::string>currentStack; //a new empty stack
+    bool validBalance = true;
+    
+    for (int i = 0; i < inputString.length(); i++)
+    {
+        while(validBalance && i < inputString.length()) 
+        {
+            char ch;
+            inputString[i];
+            i++;
+
+            if(ch == '{')
+            {
+                currentStack.push("{");
+            }
+            else if (ch == '}')
+            {
+                if(!currentStack.isEmpty())
+                {
+                    currentStack.pop();
+                }
+                else
+                {
+                    validBalance = false;
+                }
+            }
+        }
+        if(validBalance && currentStack.isEmpty())
+        {
+            std::cout << "The current stack has balanced braces\n";
+        }
+        else
+        {
+            std::cout << "The current stack does not have balanced braces\n";
+        }
+
+    }
+}
+// TODO end
+
+bool isPalindrome(const std::string & inputString) 
+{
+    // TODO begin
+    
 }
 
-bool isPalindrome(const std::string & inputString) {
-    // TODO begin
-    // TODO end
-}
-
-std::string reversedString(const std::string & inputString) {
+std::string reversedString(const std::string & inputString) 
+{
     // TODO begin
     return {}; // TODO: Replace stub.
     // TODO end
 }
 
 // Helper for infixToPostFix.
-int precedence(char op) {
-    if(op == '*' || op == '/') {
+int precedence(char op) 
+{
+    if(op == '*' || op == '/') 
+    {
         return 2;
-    } else {
+    } 
+    else 
+    {
         assert(op == '+' || op == '-');
         return 1;
     }
 }
 
 // Helper for infixToPostFix.
-bool isOperator(char ch) {
+bool isOperator(char ch) 
+{
     return ch == '+' || ch == '-' || ch == '*' || ch == '/';
 }
 
 // Helper for infixToPostFix.
-bool isOperand(char ch) {
+bool isOperand(char ch) 
+{
     // Cast is necessary because isalpha expects unsigned char. Passing in char is undefined.
     return std::isalpha(static_cast<unsigned char>(ch));
 }
 
-std::string infixToPostFix(const std::string & infix) {
+std::string infixToPostFix(const std::string & infix) 
+{
     // TODO begin
     return {}; // TODO: replace stub.
     // TODO end
@@ -329,9 +374,11 @@ std::string infixToPostFix(const std::string & infix) {
 
 // Small helper: drain a stack into a vector from top→bottom (destructive).
 template <typename Stack, typename T>
-static std::vector<T> drain_to_vec(Stack & s) {
+static std::vector<T> drain_to_vec(Stack & s) 
+{
     std::vector<T> out;
-    while (!s.isEmpty()) {
+    while (!s.isEmpty()) 
+    {
         out.push_back(s.peek());
         s.pop();
     }
@@ -339,7 +386,8 @@ static std::vector<T> drain_to_vec(Stack & s) {
 }
 
 // 01) Do these tests FIRST: ArrayStack basics (push/peek/pop/isEmpty)
-TEST_CASE("[01] ArrayStack — basic operations") {
+TEST_CASE("[01] ArrayStack — basic operations") 
+{
     ArrayStack<int, MIN_ARRAY_SIZE> s;
     CHECK(s.isEmpty());
 
@@ -359,7 +407,8 @@ TEST_CASE("[01] ArrayStack — basic operations") {
 
 // 02) NEXT: ListStack basics (push/peek/pop/isEmpty)
 // Make sure basic linked structure operations work exactly like the array version.
-TEST_CASE("[02] ListStack — basic operations") {
+TEST_CASE("[02] ListStack — basic operations") 
+{
     ListStack<int> s;
     CHECK(s.isEmpty());
 
@@ -382,7 +431,8 @@ TEST_CASE("[02] ListStack — basic operations") {
 // - Mutating the original after copying should NOT affect the copy.
 // - Popping from both should yield identical sequences.
 // - Self-consistency: copying an empty stack yields empty.
-TEST_CASE("[03] ListStack — copy constructor deep copy") {
+TEST_CASE("[03] ListStack — copy constructor deep copy") 
+{
     // Build original: top is 3
     ListStack<int> a;
     a.push(1);
@@ -419,7 +469,8 @@ TEST_CASE("[03] ListStack — copy constructor deep copy") {
 // - Deep copy behavior.
 // - Previous contents of LHS are discarded safely.
 // - Self-assignment should not corrupt.
-TEST_CASE("[04] ListStack — copy assignment operator") {
+TEST_CASE("[04] ListStack — copy assignment operator") 
+{
     ListStack<int> src;
     src.push(1);
     src.push(2);
@@ -458,7 +509,8 @@ TEST_CASE("[04] ListStack — copy assignment operator") {
 // 05) NEXT: Move constructor
 // - Source becomes empty; destination takes ownership.
 // - Order must be preserved.
-TEST_CASE("[05] ListStack — move constructor") {
+TEST_CASE("[05] ListStack — move constructor") 
+{
     ListStack<int> src;
     src.push(1);
     src.push(2);
@@ -477,7 +529,8 @@ TEST_CASE("[05] ListStack — move constructor") {
 // - LHS old contents discarded, takes RHS nodes.
 // - RHS becomes empty.
 // - Self move-assign should be a guarded no-op (by address check).
-TEST_CASE("[06] ListStack — move assignment operator") {
+TEST_CASE("[06] ListStack — move assignment operator") 
+{
     ListStack<int> a;
     a.push(10);
     a.push(20);
@@ -510,7 +563,8 @@ TEST_CASE("[06] ListStack — move assignment operator") {
 
 // 07) NEXT: Algorithms (reverse, palindrome, curly braces)
 // Do these after both stacks are solid. They are independent of stack code.
-TEST_CASE("[07] Algorithms — reversedString & isPalindrome & braces") {
+TEST_CASE("[07] Algorithms — reversedString & isPalindrome & braces") 
+{
     // reversedString
     CHECK(reversedString("").empty());
     CHECK(reversedString("a") == "a");
@@ -537,7 +591,8 @@ TEST_CASE("[07] Algorithms — reversedString & isPalindrome & braces") {
 
 // 08) LAST: infix → postfix (operators, precedence, parentheses)
 // Tackle this once everything else is green.
-TEST_CASE("[08] Infix→Postfix — core conversions") {
+TEST_CASE("[08] Infix→Postfix — core conversions") 
+{
     CHECK(infixToPostFix("").empty());
 
     CHECK(infixToPostFix("a") == "a");
