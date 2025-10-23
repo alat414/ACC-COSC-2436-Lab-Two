@@ -361,6 +361,10 @@ std::string reversedString(const std::string & inputString)
 // Helper for infixToPostFix.
 int precedence(char op) 
 {
+    if(op == '^')
+    {
+        return 3;
+    }
     if(op == '*' || op == '/') 
     {
         return 2;
@@ -371,11 +375,16 @@ int precedence(char op)
         return 1;
     }
 }
-/*
+
 // Helper for infixToPostFix.
 bool isOperator(char ch) 
 {
     return ch == '+' || ch == '-' || ch == '*' || ch == '/';
+}
+
+bool isRightAssociative(char ch)
+{
+    return ch == '^';
 }
 
 // Helper for infixToPostFix.
@@ -388,10 +397,48 @@ bool isOperand(char ch)
 std::string infixToPostFix(const std::string & infix) 
 {
     // TODO begin
-    return {}; // TODO: replace stub.
+    ListStack<char>signStack;
+    std::string currentInput;
+
+    for (int i = 0; i < infix.length(); i++)
+    {
+        char c = infix[i];
+
+        if ((c >= 'a' && c <= 'z') ||
+            (c >= 'A' && c <= 'Z') ||
+            (c >= '0' && c <= '9'))
+        {
+            currentInput += c;
+        }
+        else if (c == '(')
+        {
+            signStack.push('(');
+        }
+        else if (c == ')')
+        {
+            while(!signStack.isEmpty() && signStack.top() != '(')
+            {
+                currentInput += signStack.top();
+                signStack.top();
+            }
+            signStack.pop();
+        }
+        else
+        {
+            while(!signStack.isEmpty() && signStack.top() != '(' &&
+                  (precedence(signStack.top()) > precedence(c) || 
+                  (precedence(signStack.top()) == precedence(c) && !isRightAssociative(c))))
+            {
+                currentInput += signStack.top();
+                signStack.pop();
+            }
+            signStack.push(c);
+        }
+    }
+    return currentInput; // TODO: replace stub.
     // TODO end
 }
-*/
+
 // ==============================
 // Guided Test Plan (Do in order)
 // ==============================
