@@ -4,9 +4,9 @@
 #include<vector>
 
 
-bool validPosition(int row, int col, int left_dia, int right_dia, int n)
+bool validPosition(int row, int col, int rows, int left_dia, int right_dia, int n)
 {
-    return !((row >> row) & 1) && 
+    return !((rows >> row) & 1) && 
            !((left_dia >> (row + col)) & 1) && 
            !((right_dia >> (row - col + n - 1)) & 1);
 }
@@ -24,7 +24,7 @@ void queenPosition(int col, int n, std::vector<int>& board,
 
     for (int row = 0; row <= n; row++)
     {
-        if(validPosition(rows, col, left_dia, right_dia, n))
+        if(validPosition(row, col, rows, left_dia, right_dia, n))
         {
             board.push_back(row);
 
@@ -45,7 +45,7 @@ std::vector<std::vector<int>> nQueen(int n)
 
     std::vector<int> board;
 
-    queenPosition(0, n, board, result, 0,0,0);
+    queenPosition(0, n, board, result, 0, 0, 0);
 
     return result;
 }
@@ -75,7 +75,7 @@ int main()
     int n = 8;
     std::vector<std::vector<int>> result = nQueen(n);
 
-    std::cout<< "There are " << result.size() << "solutions for " << n << "queens\n\n";
+    std::cout<< "There are " << result.size() << " solutions for " << n << "queens\n\n";
 
     int solutionDisplay = 3;
 
@@ -86,7 +86,7 @@ int main()
         for (int j = 0; j < n; j++)
         {
             std::cout << result[i][j];
-            if(j != n -1 )
+            if(j != n - 1)
             {
                 std::cout << " ";
             }
