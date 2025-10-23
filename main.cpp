@@ -404,9 +404,13 @@ std::string infixToPostFix(const std::string & infix)
     {
         char c = infix[i];
 
-        if ((c >= 'a' && c <= 'z') ||
-            (c >= 'A' && c <= 'Z') ||
-            (c >= '0' && c <= '9'))
+        if(c == ' ')
+        {
+            continue;
+        }
+        else if ((c >= 'a' && c <= 'z') ||
+                 (c >= 'A' && c <= 'Z') ||
+                 (c >= '0' && c <= '9'))
         {
             currentInput += c;
         }
@@ -419,11 +423,15 @@ std::string infixToPostFix(const std::string & infix)
             while(!signStack.isEmpty() && signStack.top() != '(')
             {
                 currentInput += signStack.top();
-                signStack.top();
+                signStack.pop();
+            }
+            if (signStack.isEmpty())
+            {
+                throw std::invalid_argument("Mismatching parentheses");
             }
             signStack.pop();
         }
-        else
+        else if (isOperator(c))
         {
             while(!signStack.isEmpty() && signStack.top() != '(' &&
                   (precedence(signStack.top()) > precedence(c) || 
@@ -434,6 +442,19 @@ std::string infixToPostFix(const std::string & infix)
             }
             signStack.push(c);
         }
+        else 
+        {
+            throw std::invalid_argument("Invalid character in expression");
+        }
+    }
+    while (!signStack.isEmpty())
+    {
+        if (signStack.top() == '(')
+        {
+            throw std::invalid_argument("Mismatching parentheses");
+        }
+        currentInput += signStack.top();
+        signStack.pop();
     }
     return currentInput; // TODO: replace stub.
     // TODO end
