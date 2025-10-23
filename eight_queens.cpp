@@ -3,7 +3,7 @@
 #include<string>
 #include<vector>
 
-
+// Using function to check if the position the given queen is a safe one.
 bool validPosition(int row, int col, int rows, int left_dia, int right_dia, int n)
 {
     return !((rows >> row) & 1) && 
@@ -11,6 +11,7 @@ bool validPosition(int row, int col, int rows, int left_dia, int right_dia, int 
            !((right_dia >> (row - col + n - 1)) & 1);
 }
 
+// Generating all possibilities for queen position. 
 void queenPosition(int col, int n, std::vector<int>& board, 
                    std::vector<std::vector<int>>& result, 
                    int rows, int left_dia, int right_dia)
@@ -39,6 +40,7 @@ void queenPosition(int col, int n, std::vector<int>& board,
 
 }
 
+// Vector function to find the specific solutions for eight queens
 std::vector<std::vector<int>> nQueen(int n)
 {
     std::vector<std::vector<int>> result;
@@ -50,6 +52,7 @@ std::vector<std::vector<int>> nQueen(int n)
     return result;
 }
 
+//Displaying chess board via integer vectors.
 void displayChessBoard(const std::vector<int> & solution)
 {
     int n = solution.size();
@@ -72,12 +75,12 @@ void displayChessBoard(const std::vector<int> & solution)
 }
 int main()
 {
-    int n = 8;
+    int n = 8; // eight queens, 8 x 8 board
     std::vector<std::vector<int>> result = nQueen(n);
 
     std::cout<< "There are " << result.size() << " solutions for " << n << " queens\n\n";
 
-    int solutionDisplay = 3;
+    int solutionDisplay = 3; // Displaying 3 of the 92 solutions
 
     for (int i = 0; i < solutionDisplay && i < result.size(); i++)
     {
