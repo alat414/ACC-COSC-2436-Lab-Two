@@ -80,9 +80,7 @@ int main()
 
     std::cout<< "There are " << result.size() << " solutions for " << n << " queens\n\n";
 
-    int solutionDisplay = 3; // Displaying 3 of the 92 solutions
-
-    for (int i = 0; i < solutionDisplay && i < result.size(); i++)
+    for (int i = 0; i < result.size(); i++)
     {
         std::cout << "Solution " << (i + 1) << ":\n";
         std::cout << "Board positions: [";
